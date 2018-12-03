@@ -2,7 +2,7 @@ autoload -Uz compinit
 compinit
 
 source ~/.zsh_plugins.sh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=1"
 
 if [ $commands[helm] ]; then
@@ -22,6 +22,7 @@ alias fcopy='xclip -sel clip <'
 alias merge='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=finished.pdf'
 
 b64d () { echo $1 | base64 -d }
+function mkcd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
 
 alias k='kubectl'
 alias kg='kubectl get'
@@ -56,8 +57,6 @@ hgr () {
 	helm ls | awk 'FNR > 1 { printf "%-40s %-10s %-10s %-25s\n", $1, $2, $8, $NF }'
 }
 
-function mkcd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
-
 alias g='git'
 alias gaa='git add --all'
 alias gst='git status'
@@ -89,11 +88,16 @@ export LC_CTYPE=en_US.UTF-8
 #zstyle ':completion:*' completer _complete _ignored
 #zstyle :compinstall filename '/home/greg/.zshrc'
 
-SAVEHIST=10000
 HISTFILE=~/.zsh_history
+HISTSIZE=5000
+SAVEHIST=5000
+setopt appendhistory
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/greg/tools/google-cloud-sdk/path.zsh.inc' ]; then . '/home/greg/tools/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/greg/tools/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/greg/tools/google-cloud-sdk/completion.zsh.inc'; fi
+
+[[ -n "${key[Up]}" ]] && bindkey "${key[Up]}" history-beginning-search-backward
+[[ -n "${key[Down]}" ]] && bindkey "${key[Down]}" history-beginning-search-forward
