@@ -24,6 +24,8 @@ alias merge='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -
 b64d () { echo $1 | base64 -d }
 function mkcd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
 
+alias redo='sudo $(fc -ln -1)'
+
 # DOCKER
 # ------
 
@@ -102,10 +104,6 @@ alias gcfd='git clean -fd'
 alias gcb='git checkout -b'
 
 export GOPATH=$HOME/go
-export GOROOT=/usr/local/go
-export GOBIN=$GOROOT/bin
-export PATH=$PATH:$GOBIN
-export PATH=$PATH:$GOPATH/bin
 
 #ssh-add -t 12h ~/.ssh/github
 
@@ -121,15 +119,25 @@ setopt    appendhistory
 setopt    sharehistory
 setopt    incappendhistory
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/greg/tools/google-cloud-sdk/path.zsh.inc' ]; then . '/home/greg/tools/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/greg/tools/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/greg/tools/google-cloud-sdk/completion.zsh.inc'; fi
-
 [[ -n "${key[Up]}" ]] && bindkey "${key[Up]}" history-beginning-search-backward
 [[ -n "${key[Down]}" ]] && bindkey "${key[Down]}" history-beginning-search-forward
 
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
+
 # secrets & other vars
 [[ -f ~/.zshrc.secrets ]] && source ~/.zshrc.secrets
+[[ -f ~/.zshrc.keys ]] && source ~/.zshrc.keys
 
+
+
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/greg/google-cloud-sdk/path.zsh.inc' ]; then . '/home/greg/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/greg/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/greg/google-cloud-sdk/completion.zsh.inc'; fi
