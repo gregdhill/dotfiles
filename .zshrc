@@ -104,6 +104,7 @@ alias gcfd='git clean -fd'
 alias gcb='git checkout -b'
 
 export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 
 #ssh-add -t 12h ~/.ssh/github
 
@@ -128,6 +129,7 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
+setxkbmap gb
 
 # secrets & other vars
 [[ -f ~/.zshrc.secrets ]] && source ~/.zshrc.secrets

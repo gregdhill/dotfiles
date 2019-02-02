@@ -28,7 +28,7 @@ font-3 = "Font Awesome 5 Brands:pixelsize=12;3"
 ;--------;
 
 background = 0
-foreground = #FFFFFF
+foreground = #000000
 border-color = 0
 
 ;---------------;
@@ -58,8 +58,8 @@ pin-workspaces = true
 strip-wsnumbers = true
 enable-scroll = false
 
-label-unfocused-foreground = #afafaf
-label-focused-foreground = #c5a9f9
+label-unfocused-foreground = #979a9a
+label-focused-foreground = #000000
 label-urgent-foreground = #ff0000
 
 [module/time]
