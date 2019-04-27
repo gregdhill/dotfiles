@@ -34,7 +34,6 @@ alias dkc='docker kill $(docker ps -q)'
 alias ddc='docker rm $(docker ps -a -q)'
 alias ddi='docker rmi $(docker images -q)'
 
-
 # KUBERNETES
 # ----------
 
@@ -55,7 +54,9 @@ alias kdp='kubectl describe pod'
 alias krm='kubectl delete pod'
 alias wkgp='watch -n 1 kubectl get pods'
 
-ksh () {kubectl exec -it $1 sh}
+knp () { kubectl get pods --all-namespaces  --no-headers --field-selector spec.nodeName=$1 }
+
+ksh () { kubectl exec -it $1 sh }
 
 koy () {
 	output=$(kubectl get deployments $1 --output yaml 2> /dev/null)
@@ -96,15 +97,17 @@ alias hdr='helm delete --purge'
 alias g='git'
 alias gaa='git add --all'
 alias gst='git status'
-alias gcam='git commit --signoff -a -m'
+alias gcam='git commit --signoff -S -a -m'
 alias gpush='git push'
 alias gpull='git pull'
 alias gf='git fetch'
 alias gcfd='git clean -fd'
+alias gco='git checkout'
 alias gcb='git checkout -b'
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+export GO111MODULE=on
 
 #ssh-add -t 12h ~/.ssh/github
 
@@ -114,8 +117,8 @@ export LC_CTYPE=en_US.UTF-8
 #zstyle :compinstall filename '/home/greg/.zshrc'
 
 HISTFILE=~/.zsh_history
-HISTSIZE=5000
-SAVEHIST=5000
+HISTSIZE=10000
+SAVEHIST=10000
 setopt    appendhistory
 setopt    sharehistory
 setopt    incappendhistory
@@ -135,11 +138,8 @@ setxkbmap gb
 [[ -f ~/.zshrc.secrets ]] && source ~/.zshrc.secrets
 [[ -f ~/.zshrc.keys ]] && source ~/.zshrc.keys
 
-
-
-
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/greg/google-cloud-sdk/path.zsh.inc' ]; then . '/home/greg/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/usr/local/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/greg/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/greg/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/usr/local/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/google-cloud-sdk/completion.zsh.inc'; fi
