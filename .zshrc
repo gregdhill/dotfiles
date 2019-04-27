@@ -13,9 +13,6 @@ if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
 fi
 
-# git commit --signoff (-s)
-# git config commit.gpgsign true
-# git config --global commit.gpgsign true
 
 alias tcopy='xclip -sel clip'
 alias fcopy='xclip -sel clip <'
@@ -94,10 +91,11 @@ alias hdr='helm delete --purge'
 # GIT
 # ---
 
+# git config --global commit.gpgsign true
 alias g='git'
 alias gaa='git add --all'
 alias gst='git status'
-alias gcam='git commit --signoff -S -a -m'
+alias gcam='git commit -sS -a -m'
 alias gpush='git push'
 alias gpull='git pull'
 alias gf='git fetch'

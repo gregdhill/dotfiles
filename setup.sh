@@ -1,12 +1,12 @@
 #!/bin/bash
 
 mkdir -p $HOME/.config
-for path in $(find . -print | grep '\.\/\.[a-zA-Z0-9]*' | grep -ve 'git'); do
+for path in $(find -printf '%P\n' | grep -vE 'git|setup'); do
   if [ -d "${path}" ]; then
     mkdir -p $HOME/$path
   elif [ -f "${path}" ]; then
     rm -rf $HOME/$path
-    ln -s $path $HOME/$path
+    ln -s `pwd`/$path $HOME/$path
   fi
 done
 
