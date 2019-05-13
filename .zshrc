@@ -13,18 +13,17 @@ if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
 fi
 
-
 alias tcopy='xclip -sel clip'
 alias fcopy='xclip -sel clip <'
 alias merge='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=finished.pdf'
 
-b64d () { echo $1 | base64 -d }
+function b64d () { echo $1 | base64 -d }
 function mkcd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
-
+function port () { lsof -i :$1 }
 alias redo='sudo $(fc -ln -1)'
 
-# DOCKER
-# ------
+# CONTAINERS
+# ----------
 
 alias dlc='docker container ls'
 alias dkc='docker kill $(docker ps -q)'
@@ -76,7 +75,6 @@ _kube_namespaces () {
 }
 compdef _kube_namespaces ksn
 
-
 # HELM
 # ----
 
@@ -87,11 +85,13 @@ hgr () {
 
 alias hdr='helm delete --purge'
 
-
 # GIT
 # ---
 
+# gpg --list-secret-keys --keyid-format LONG
+# git config --global user.signingkey <key>
 # git config --global commit.gpgsign true
+
 alias g='git'
 alias gaa='git add --all'
 alias gst='git status'
@@ -102,14 +102,22 @@ alias gf='git fetch'
 alias gcfd='git clean -fd'
 alias gco='git checkout'
 alias gcb='git checkout -b'
+alias gu='git fetch && git pull'
+
+# GOLANG
+# ------
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export GO111MODULE=on
 
+alias gru='go run'
+alias grd='go run .'
+
 #ssh-add -t 12h ~/.ssh/github
 
-export LC_CTYPE=en_US.UTF-8
+export LC_CTYPE="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
 
 #zstyle ':completion:*' completer _complete _ignored
 #zstyle :compinstall filename '/home/greg/.zshrc'
@@ -124,15 +132,17 @@ setopt    incappendhistory
 [[ -n "${key[Up]}" ]] && bindkey "${key[Up]}" history-beginning-search-backward
 [[ -n "${key[Down]}" ]] && bindkey "${key[Down]}" history-beginning-search-forward
 
+setxkbmap gb
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
-setxkbmap gb
+bindkey "\e[3~" delete-char
 
-# secrets & other vars
+# session secrets
+eval `keychain --agents ssh -q --eval github --eval gitlab`
 [[ -f ~/.zshrc.secrets ]] && source ~/.zshrc.secrets
 [[ -f ~/.zshrc.keys ]] && source ~/.zshrc.keys
 

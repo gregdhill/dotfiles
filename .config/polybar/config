@@ -74,7 +74,6 @@ type = internal/date
 date =  %e %B - %A
 label = %date%
 
-
 [module/battery]
 type = internal/battery
 
@@ -185,7 +184,7 @@ tray-position = center
 [module/hibernate]
 type = custom/text
 content = "  "
-click-left = i3lock-fancy-rapid 5 5 && systemctl suspend
+click-left = betterlockscreen -s
 
 [module/shutdown]
 type = custom/text
@@ -200,7 +199,7 @@ click-left = reboot
 [module/lock]
 type = custom/text
 content = "  "
-click-left = i3lock-fancy-rapid 5 5
+click-left = betterlockscreen -l
 
 [module/screenshot]
 type = custom/text
