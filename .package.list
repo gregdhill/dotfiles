@@ -14,7 +14,7 @@ openssh
 xclip
 ttf-font-awesome
 playerctl
-alsa
+alsa-utils
 light
 spotify
 docker

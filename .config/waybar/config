@@ -2,9 +2,9 @@
     "layer": "top",
     "height": 30,
 
-    "modules-left": ["sway/mode", "custom/media"],
+    "modules-left": [],
     "modules-center": ["sway/workspaces"],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "battery", "battery#bat2", "clock", "tray"],
+    "modules-right": ["pulseaudio", "network", "cpu", "memory", "temperature", "clock"],
 
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
@@ -78,17 +78,6 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "amixer set Master toggle"
-    },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+        "on-click": "pactl set-sink-mute 1 toggle"
     }
 }

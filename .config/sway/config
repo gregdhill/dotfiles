@@ -140,12 +140,18 @@ gaps outer 5
 smart_gaps on
 for_window [class="^.*"] border pixel 0
 
-# desktop
-exec --no-startup-id waybar
+# laptop
 output eDP-1 scale 2
 output eDP-1 pos 0 0
 output DP-2 pos 1920 0
+
+# desktop
+output DP-1 transform 90
+output DP-1 pos 1920 0
+
 output "*" bg /home/greg/Pictures/wallpaper.jpg fill
+
+exec --no-startup-id waybar
 
 # touchpad
 exec --no-startup-id libinput-gestures-setup start
@@ -154,9 +160,9 @@ input "1739:30383:DELL08AF:00_06CB:76AF_Touchpad" {
     natural_scroll enabled
 }
 
-
 # fix keyboard
 exec setxkbmap gb
+input 9610:4102:GXT_SX__Gaming_keyboard_GXT_SX__Gaming_keyboard xkb_layout gb
 
 # sreen brightness controls
 bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
@@ -174,5 +180,3 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 floating_maximum_size 1000 x 1000
-
-

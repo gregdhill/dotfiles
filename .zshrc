@@ -54,6 +54,34 @@ _docker_containers () {
 compdef _docker_containers dsh
 
 
+# KUBERNETES
+# ----------
+
+alias k='kubectl'
+alias kg='kubectl get'
+alias kgd='kubectl get deployments'
+alias kgr='kubectl get replicasets'
+alias kgsec='kubectl get secrets'
+alias kgsrv='kubectl get services'
+alias kgc='kubectl get configmaps'
+alias kgp='kubectl get pods'
+alias kgi='kubectl get ingresses.extensions'
+alias kge='kubectl get endpoints'
+alias kl='kubectl logs'
+alias klf='kubectl logs -f'
+alias kd='kubectl describe'
+alias kdp='kubectl describe pod'
+alias krm='kubectl delete'
+alias krmp='kubectl delete pod'
+alias krms='kubectl delete secrets'
+alias krmc='kubectl delete configmaps'
+alias kpf='kubectl port-forward'
+
+# HELM
+# ----
+
+alias hdr='helm delete'
+
 # GIT
 # ---
 
@@ -74,7 +102,9 @@ alias gco='git checkout'
 alias gcb='git checkout -b'
 alias gu='git fetch && git pull'
 alias grc='git rebase --continue'
+alias gra='git rebase --abort'
 alias ghead='git rev-parse HEAD'
+alias gcl='git clone'
 
 # GOLANG
 # ------
@@ -132,3 +162,4 @@ if [ -f '/usr/local/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/google-
 if [ -f '/usr/local/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/google-cloud-sdk/completion.zsh.inc'; fi
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+source /usr/share/nvm/init-nvm.sh
