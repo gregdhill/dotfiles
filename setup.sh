@@ -11,9 +11,10 @@ for path in $(find -printf '%P\n' | grep -vE 'git|setup'); do
 done
 
 if [[ -z $(which antibody) ]]; then
-  curl -sL git.io/antibody | sh -s
-  antibody bundle < ~/.zsh_plugins.txt > $HOME/.zsh_plugins.sh
+  curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
 fi
+
+antibody bundle < ~/.zsh_plugins.txt > $HOME/.zsh_plugins.sh
 
 if [ ! -d $HOME/.zsh/zsh-autosuggestions ]; then
   git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.zsh/zsh-autosuggestions

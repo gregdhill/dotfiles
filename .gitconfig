@@ -1,0 +1,10 @@
+[commit]
+    gpgsign = true
+
+[user]
+    signingkey = 54841B20DB63C22B
+    name = Gregory Hill
+    email = gregorydhill@outlook.com
+
+[core]
+	editor = vim
